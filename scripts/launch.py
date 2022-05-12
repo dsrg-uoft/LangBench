@@ -4,7 +4,9 @@ from typing import Any, Generator
 
 PORT: int = 13000
 
-THREADS: List[int] = [ 1, 2, 4, 8, 16, 32, 64, 96, 128, 160, 256, 512, 768, 1024 ]
+# shortened for artifact for the sake of time
+THREADS: List[int] = [ 1, 8, 16, 32, 64, 96, 128, 160, 256, 512, 768 ]
+# THREADS: List[int] = [ 1, 2, 4, 8, 16, 32, 64, 96, 128, 160, 256, 512, 768, 1024 ]
 BIG_THREADS: List[int] = [ 1152, 1280, 1408, 1536, 1664, 1792, 1920, 2048 ]
 
 def simple_config(test: TestType, lang: Language, rt: RunType, **kwargs) -> Config:
@@ -627,12 +629,12 @@ def run_js_notype(prefix: str = None, n: int = 10) -> None:
 
 def run_all(prefix: str = None, n: int = 10) -> None:
 	for i in range(n):
-		run_kv(prefix, n)
+		run_fs(prefix, n)
+		run_lp(prefix, n)
 		run_sudoku(prefix, n)
 		run_sort(prefix, n)
 		run_graph(prefix, n)
-		run_lp(prefix, n)
-		run_fs(prefix, n)
+		run_kv(prefix, n)
 
 def main() -> None:
 	run_all("test/", 1)

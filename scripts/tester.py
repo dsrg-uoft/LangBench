@@ -430,10 +430,10 @@ class LogParser(Test):
 
 class FileServerConfig(Config):
 	device_path: Dict[Device, str] = {
-			Device.HDD: HOME + "/yscope-logs/hadoop-1k",
-			Device.MFS: "/mnt/mfs/yscope-logs/hadoop-1k",
-			Device.SSD: "/mnt/SSD/yscope-logs/hadoop-1k",
-			Device.RAM: HOME + "/tmpfs/yscope-logs/hadoop-1k",
+			Device.HDD: HOME + "/hottub3-yscope-logs/hadoop-1k",
+			Device.MFS: "/mnt/mfs/hottub3-yscope-logs/hadoop-1k",
+			Device.SSD: "/mnt/SSD/hottub3-yscope-logs/hadoop-1k",
+			Device.RAM: HOME + "/tmpfs/hottub3-yscope-logs/hadoop-1k",
 			}
 
 	def __init__(self, lang: Language, rt: RunType, port: int,
