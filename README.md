@@ -55,6 +55,6 @@ Not mentioned in the paper, but the use of the boost regex library creates a spe
 Must also build the client located in [file-server/client](file-server/client) by running make.
 
 # Runtime repositories
-https://github.com/dsrg-uoft/LangBench-openjdk
-https://github.com/dsrg-uoft/LangBench-nodejs
-https://github.com/dsrg-uoft/LangBench-cpython
+* https://github.com/dsrg-uoft/LangBench-openjdk
+* https://github.com/dsrg-uoft/LangBench-nodejs
+* https://github.com/dsrg-uoft/LangBench-cpython
