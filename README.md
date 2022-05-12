@@ -33,8 +33,8 @@ They expect a fairly rigid file structure and the environment variable `LANGBENC
 
 Exceptions are listed below.
 
-## file server
-Must also build the client located in [file-server/client](file-server/client) by running make.
+## key value store
+Requires Redis (https://redis.io/) as it uses the benchmark provided. Set `REDIS_HOME` or edit [tester.py](scripts/tester.py).
 
 ## graph (iterative and recursive)
 ### cpp
@@ -50,6 +50,9 @@ Depends on abseil-cpp (https://abseil.io/ https://github.com/abseil/abseil-cpp).
 Follow their README.md for more details.
 
 Not mentioned in the paper, but the use of the boost regex library creates a speedup. The make scripts support this if boost is provided.
+
+## file server
+Must also build the client located in [file-server/client](file-server/client) by running make.
 
 # Runtime repositories
 https://github.com/dsrg-uoft/LangBench-openjdk

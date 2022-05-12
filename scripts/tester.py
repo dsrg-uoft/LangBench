@@ -13,8 +13,30 @@ HOME: str = os.environ.get("LANGBENCH", "$HOME/LangBench" )
 CLEAR_MEM: str = HOME + "/scripts/clear_mem/clear_mem.o"
 TIME: str = HOME + "/scripts/obs.o"
 OBS: str = HOME + "/scripts/obs.o -m"
+REDIS_HOME: str = os.environ.get("REDIS_HOME", "$HOME/redis" )
 
 RUNTIME_HOME: str = HOME + "/runtimes"
+
+class RunType(Enum):
+	vanilla = 0
+	interp = 1
+	pypy = 2
+	notype = 3
+
+class Language(Enum):
+	cpp_o2 = 0
+	cpp_o3 = 1
+	go = 2 # enum larger than this can be interpreted
+	java = 3
+	js = 4
+	python = 5
+
+	@staticmethod
+	def noto2():
+		for lang in Language:
+			if lang != Language.cpp_o2:
+				yield lang
+
 RUNTIME: Dict[Language, Dict[RunType, str]] = {
 	Language.java: {
 		RunType.vanilla: RUNTIME_HOME + "/openjdk/jdk-vanilla-server/bin/java",
@@ -41,20 +63,6 @@ class TestType(Enum):
 	sort = 5
 	file_server = 6
 
-class Language(Enum):
-	cpp_o2 = 0
-	cpp_o3 = 1
-	go = 2 # above this can be interpreted
-	java = 3
-	js = 4
-	python = 5
-
-	@staticmethod
-	def noto2():
-		for lang in Language:
-			if lang != Language.cpp_o2 or lang != Language.pypy:
-				yield lang
-
 class Device(Enum):
 	HDD = 0
 	MFS = 1
@@ -65,12 +73,6 @@ def interp_language(lang: Language) -> bool:
 	if lang.value > 2:
 		return True
 	return False
-
-class RunType(Enum):
-	vanilla = 0
-	interp = 1
-	pypy = 2
-	notype = 3
 
 class Config:
 	def __init__(self, test: TestType, lang: Language, rt: RunType, heap_size: int,
@@ -105,7 +107,7 @@ class Test:
 		self.client_cmd: str = None
 		self.alarm: bool = False
 		self.name: str = name
-		self.cwd = HOME + "{}/{}".format(name, conf.language.name.split("_")[0])
+		self.cwd = HOME + "/{}/{}".format(name, conf.language.name.split("_")[0])
 		self.nameify()
 		os.mkdir(self.path)
 
@@ -357,7 +359,7 @@ class KeyValue(Test):
 		self.cmd += str(conf.rows)
 
 		self.client_cmd: str = TIME + " "
-		self.client_cmd += "/home/adrian/crafting-bench/redis/src/redis-benchmark "
+		self.client_cmd += REDIS_HOME + "/src/redis-benchmark "
 		self.client_cmd += "-c {} ".format(conf.threads)
 		self.client_cmd += "-n 2000000 "
 		self.client_cmd += "-d 64 "
@@ -463,11 +465,11 @@ class FileServer(Test):
 		self.cmd += conf.server_path
 
 		self.client_cmd: str = TIME + " "
-		self.client_cmd += HOME + "file-server/client/client.o "
+		self.client_cmd += HOME + "/file-server/client/client.o "
 		self.client_cmd += conf.ipaddr + " "
 		self.client_cmd += str(conf.port) + " "
 		self.client_cmd += str(conf.threads) + " "
-		self.client_cmd += HOME + "file-server/files-1k-rel.txt"
+		self.client_cmd += HOME + "/file-server/files-1k-rel.txt"
 
 class TestRunner:
 	@staticmethod

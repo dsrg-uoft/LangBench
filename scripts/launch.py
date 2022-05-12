@@ -552,12 +552,12 @@ def run_fs_cpus(prefix: str = None, n: int = 10) -> None:
 				run_cpus(TestType.file_server, lang, CPUS, prefix = prefix,
 							threads = threads, device = dev)
 
-def run_all_cpu(prefix: str = None, n: int = 10) -> None:
+def run_all_cpus(prefix: str = None, n: int = 10) -> None:
 	for i in range(n):
-		#run_kv_cpus(prefix, n)
-		#run_sudoku_cpus(prefix, n)
-		#run_sort_cpus(prefix, n)
-		#run_graph_cpus(prefix, n)
+		run_kv_cpus(prefix, n)
+		run_sudoku_cpus(prefix, n)
+		run_sort_cpus(prefix, n)
+		run_graph_cpus(prefix, n)
 		run_lp_cpus(prefix, n)
 		run_fs_cpus(prefix, n)
 
@@ -625,23 +625,18 @@ def run_js_notype(prefix: str = None, n: int = 10) -> None:
 		run1(TestType.key_value, Language.js, RunType.notype, prefix = prefix, args = kv)
 		run1(TestType.sort, Language.js, RunType.notype, prefix = prefix, args = so)
 
+def run_all(prefix: str = None, n: int = 10) -> None:
+	for i in range(n):
+		run_kv(prefix, n)
+		run_sudoku(prefix, n)
+		run_sort(prefix, n)
+		run_graph(prefix, n)
+		run_lp(prefix, n)
+		run_fs(prefix, n)
+
 def main() -> None:
-	run_js_args(None, "atc-js-vanilla/")
-	run_js_notype("atc-js-notype/")
-	# run_js_args("--prof", "atc-js-prof/")
+	run_all("test/", 1)
 
-
-
-	#run_kv_gc("kv-gc-0524/", 3)
-	#run_python_fs("fs-py-threading/", 2)
-	#run_fs("fs-bigthreads/", 2)
-	#run_fs_ram("fs-ram/", 2)
-	#run_fs_test("fs-go-test/", 2)
-	#run_fs_lang(Language.go, "fs-go/", 4)
-
-	#run_all_cpu("cpus-1201/", 4)
-	#run_all_heaps("heaps-1205/", 2)
-	#run_all_pypy("eurosys21-pypy-0130/", 3)
 
 if __name__ == "__main__":
 	main()
