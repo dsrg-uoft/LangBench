@@ -1,0 +1,4 @@
+*.o
+*.class
+build/
+.mypy_cache/
