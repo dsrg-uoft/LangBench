@@ -11,6 +11,7 @@ You can see the `main` function at the bottom of the file for examples.
 This file controls the definition and execution of any benchmark. It can be extended by creating two new classes. The first is a configuration class that inherits `Config` and defines any options for running the application. The second is a class that inherits `Test` to build any commands and execute the benchmark/test itself.
 ### configuration
 You may need to change the paths at the top of the file to match your structure. Specifically, the hostname for a client machine (used in file server, and key value store benchmarks) will likely need to be changed.
+Defining `LANGBENCH` and following the structure can help, but all paths can be edited. The scripts expect any binary files to be built, so there is no dependency on the Makefiles.
 
 ## building/dependencies
 The scripts use two small C programs.
@@ -25,6 +26,10 @@ They are left intact, but will need some understanding/editing to be used.
 Generally, only the cpp, java, and go versions require any building.
 Simply doing `pushd <benchmark>/<language> && make && popd` will work.
 i.e. `pushd sort/cpp && make && popd`
+
+Unfortunately, the Makefiles are rather inflexible currently likely requiring you to edit them.
+They expect a fairly rigid file structure and the environment variable `LANGBENCH` to be defined.
+`LANGBENCH` should be the location of this repository, and inside it you can store the various runtimes under `./runtimes`.
 
 Exceptions are listed below.
 
