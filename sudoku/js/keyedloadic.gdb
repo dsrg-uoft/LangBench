@@ -1,7 +1,7 @@
 
 # i == 10 no comments, 13 with comments
 
-file ../../runtimes/node/node
+file ../../runtimes/nodejs/node
 set disassembly-flavor intel
 b v8::internal::Compiler::Compile(v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Compiler::ClearExceptionFlag, v8::internal::IsCompiledScope*)
 run --no-opt --code-comments --print-builtin-code sudoku.js ../input-64.txt > stdout.txt

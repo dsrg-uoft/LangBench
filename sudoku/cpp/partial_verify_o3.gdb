@@ -1,5 +1,5 @@
 
-file sudoku-o3
+file sudoku-o3.o
 set disassembly-flavor intel
 set $i = 0
 b solve

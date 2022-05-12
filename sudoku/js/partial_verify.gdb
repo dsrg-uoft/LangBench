@@ -1,7 +1,7 @@
 
 
-#file ../../runtimes/node/node
-file ../../runtimes/node/out/Debug/node
+#file ../../runtimes/nodejs/node
+file ../../runtimes/nodejs/out/Debug/node
 set disassembly-flavor intel
 b v8::internal::Compiler::Compile(v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Compiler::ClearExceptionFlag, v8::internal::IsCompiledScope*)
 run --no-turbo-inlining --print-code sudoku.js ../input-64.txt > stdout.txt

@@ -1,6 +1,6 @@
 
 handle SIGSEGV nostop noprint pass
-file ../../runtimes/jdk13/build/linux-x86_64-server-release/jdk/bin/java
+file ../../runtimes/openjdk/build/linux-x86_64-server-release/jdk/bin/java
 set disassembly-flavor intel
 set $i = 0
 set breakpoint pending on

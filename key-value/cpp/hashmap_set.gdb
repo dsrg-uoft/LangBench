@@ -1,5 +1,5 @@
 
-file key_value-debug
+file key_value-debug.o
 set disassembly-flavor intel
 set $i = 0
 b HashMap::set

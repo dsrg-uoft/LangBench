@@ -1,6 +1,6 @@
 
 
-file ../../runtimes/node/node
+file ../../runtimes/nodejs/node
 set disassembly-flavor intel
 set $i = 0
 b v8::internal::Compiler::Compile(v8::internal::Handle<v8::internal::JSFunction>, v8::internal::Compiler::ClearExceptionFlag, v8::internal::IsCompiledScope*)
