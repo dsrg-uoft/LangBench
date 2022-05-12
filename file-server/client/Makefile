@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXX = $(HOME)/crafting-bench/hottub3/prefix/bin/g++
+CXX ?= $(LANGBENCH)/prefix/bin/g++
 
 all: client.o client-debug.o read.o
 

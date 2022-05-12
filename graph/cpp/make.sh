@@ -9,10 +9,6 @@ OPTIMIZATION_LEVELS=(o2 o3)
 TRAVERSAL_TYPES=(iterative recursive)
 CONTAINER_TYPES=(stl_unordered stl_ordered absl_node absl_flat)
 
-#OPTIMIZATION_LEVELS=(o3)
-#TRAVERSAL_TYPES=(iterative)
-#CONTAINER_TYPES=(stl_unordered absl_flat)
-
 if [[ ! -d build ]]; then
 	mkdir build
 fi
