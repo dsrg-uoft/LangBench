@@ -1,0 +1,7 @@
+INFO * org.apache.hadoop* * freed by fetcher#4
+closeInMemoryFile * commitMemory * usedMemory
+loaded properties from
+about to shuffle output of map *
+2015-* * org.apache.hadoop.mapreduce.task.reduce.Fetcher: fetcher#1
+Merging 2 sorted segments
+*.ShuffleSchedulerImpl: * Assigning i-77*

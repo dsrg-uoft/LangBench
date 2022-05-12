@@ -1,5 +1,5 @@
 *.o
 *.class
 build/
-graph/cpp/abseil-cpp/
+*/cpp/abseil-cpp/
 .mypy_cache/

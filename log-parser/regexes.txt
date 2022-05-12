@@ -1,0 +1,7 @@
+INFO.*freed by fetcher#\d in [1-5]+ms
+closeInMemoryFile.*commitMemory.*usedMemory
+loaded properties from
+about to shuffle output of map [a-z0-9_]+
+about to shuffle output of map \w+
+(\d+-\d+-\d+).*org.apache.hadoop.mapreduce.task.reduce.Fetcher: fetcher#1
+\d+-\d+-\d+.*org.apache.hadoop.mapreduce.task.reduce.Fetcher: fetcher#1
