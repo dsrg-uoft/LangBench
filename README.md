@@ -52,6 +52,6 @@ Follow their README.md for more details.
 Not mentioned in the paper, but the use of the boost regex library creates a speedup. The make scripts support this if boost is provided.
 
 # Runtime repositories
-https://github.com/dsrg-uoft/LangBench-openjdk
-https://github.com/dsrg-uoft/LangBench-nodejs
-https://github.com/dsrg-uoft/LangBench-cpython
+* https://github.com/dsrg-uoft/LangBench-openjdk
+* https://github.com/dsrg-uoft/LangBench-nodejs
+* https://github.com/dsrg-uoft/LangBench-cpython
