@@ -1,0 +1,52 @@
+# Running benchmarks (scripts)
+These scripts will run the benchmarks as in the paper. However, they are not
+strictly required to run the benchmarks as the benchmarks could be used with
+different configurations and inputs to observe different properties.
+
+## [launch.py](scripts/launch.py)
+This can programmatically run any combinations of benchmarks.
+You can see the `main` function at the bottom of the file for examples.
+
+## [tester.py](scripts/tester.py)
+This file controls the definition and execution of any benchmark. It can be extended by creating two new classes. The first is a configuration class that inherits `Config` and defines any options for running the application. The second is a class that inherits `Test` to build any commands and execute the benchmark/test itself.
+### configuration
+You may need to change the paths at the top of the file to match your structure. Specifically, the hostname for a client machine (used in file server, and key value store benchmarks) will likely need to be changed.
+
+## building/dependencies
+The scripts use two small C programs.
+To build `obs.o` run `make` inside scripts.
+To build `clear_mem.o` you should first edit the path in `clear_mem.c` and then run `make`. `clear_mem.o` is just a hack to allow the scripts to easily clear the caches.
+
+## profiling/debugging
+There are many scripts for profiling and debugging, including many scripts for gdb.
+They are left intact, but will need some understanding/editing to be used.
+
+# Building benchmarks
+Generally, only the cpp, java, and go versions require any building.
+Simply doing `pushd <benchmark>/<language> && make && popd` will work.
+i.e. `pushd sort/cpp && make && popd`
+
+Exceptions are listed below.
+
+## file server
+Must also build the client located in [file-server/client](file-server/client) by running make.
+
+## graph (iterative and recursive)
+### cpp
+Depends on abseil-cpp (https://abseil.io/ https://github.com/abseil/abseil-cpp).
+Follow their README.md for more details.
+### js
+The recursive version requires a simple binding to be build. A pre-built version exists in this repository.
+
+## log parser
+### cpp
+Requires CMake to build.
+Depends on abseil-cpp (https://abseil.io/ https://github.com/abseil/abseil-cpp).
+Follow their README.md for more details.
+
+Not mentioned in the paper, but the use of the boost regex library creates a speedup. The make scripts support this if boost is provided.
+
+# Runtime repositories
+https://github.com/dsrg-uoft/LangBench-openjdk
+https://github.com/dsrg-uoft/LangBench-nodejs
+https://github.com/dsrg-uoft/LangBench-cpython
