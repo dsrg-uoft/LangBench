@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXX ?= $(LANGBENCH)/prefix/bin/g++
+CXX = $(LANGBENCH)/prefix/bin/g++
 
 all: key_value-o2.o key_value-o3.o key_value-debug.o key_value-o0.o micro_hashmap.o
 

@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXX ?= $(LANGBENCH)/prefix/bin/g++
+CXX = $(LANGBENCH)/prefix/bin/g++
 
 all: file_server-o2.o file_server-o3.o file_server.o file_server_ptr-o3.o file_server_empty-o3.o file_server_sendfile-o3.o
 

@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-JAVAC ?= $(LANGBENCH)/runtimes/openjdk/jdk-vanilla-server/bin/javac
+JAVAC = $(LANGBENCH)/runtimes/openjdk/jdk-vanilla-server/bin/javac
 
 all:
 	find . -name '*.java' | xargs $(JAVAC)

@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXX ?= $(LANGBENCH)/prefix/bin/g++
+CXX = $(LANGBENCH)/prefix/bin/g++
 
 all: sudoku-o2.o sudoku-o3.o sudoku_virtual-o2.o sudoku_virtual-o3.o
 

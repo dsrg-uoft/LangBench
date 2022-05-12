@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-GO ?= $(LANGBENCH)/runtimes/go/go-1.14.1-vanilla/go
+GO = $(LANGBENCH)/runtimes/go/go-1.14.1-vanilla/go
 
 all: sudoku.o
 
