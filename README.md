@@ -18,6 +18,10 @@ The scripts use two small C programs.
 To build `obs.o` run `make` inside scripts.
 To build `clear_mem.o` you should first edit the path in `clear_mem.c` and then run `make`. `clear_mem.o` is just a hack to allow the scripts to easily clear the caches.
 
+## figure scripts
+There are also scripts to generate the figures from the paper.
+Please use `pip install -r scripts/requirements.txt` to get all dependencies.
+
 ## profiling/debugging
 There are many scripts for profiling and debugging, including many scripts for gdb.
 They are left intact, but will need some understanding/editing to be used.
