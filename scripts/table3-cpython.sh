@@ -7,6 +7,6 @@ echo "=== cpython rdpmc"
 perf stat "$RUNTIME_PREFIX-rdpmc/python" sudoku.py ../input-64.txt
 echo
 
-echo "=== cpython rdpmc"
+echo "=== cpython rdtscp"
 perf stat "$RUNTIME_PREFIX-rdtscp/python" sudoku.py ../input-64.txt
 echo

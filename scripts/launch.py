@@ -126,7 +126,7 @@ def run_lp(prefix: str = None, n: int = 10) -> None:
 					elif lang == Language.cpp_o3:
 						for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"),
 								# ("absl_flat", "regex_boost") ]:
-								("absl_flat") ]:
+								("absl_flat", "regex_std") ]:
 								run1(TestType.log_parser, lang,
 										prefix = prefix, search = search,
 										threads = threads, cpp_map = cpp_map,
@@ -144,7 +144,11 @@ def run_fs(prefix: str = None, n: int = 10) -> None:
 					#if lang != Language.js:
 					#	run1(TestType.file_server, lang, prefix = prefix,
 					#			threads = threads, device = dev, sendfile = True)
-					run1(TestType.file_server, lang, prefix = prefix,
+					if lang == Language.js:
+						run1(TestType.file_server, lang, prefix = prefix,
+								threads = threads, device = dev, envargs = "UV_THREADPOOL_SIZE=" + str(threads))
+					else:
+						run1(TestType.file_server, lang, prefix = prefix,
 								threads = threads, device = dev)
 
 def run_graph(testtype: TestType, prefix: str = None, n: int = 10) -> None:
@@ -200,7 +204,8 @@ def run_lp_fix(prefix: str = None, n: int = 10) -> None:
 						continue
 					if lang == Language.cpp_o3:
 						for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"),
-								("absl_flat", "regex_boost") ]:
+								# ("absl_flat", "regex_boost") ]:
+								("absl_flat", "regex_std") ]:
 								run1(TestType.log_parser, lang,
 										prefix = prefix, search = search,
 										threads = threads, cpp_map = cpp_map,
@@ -407,7 +412,7 @@ def run_lp_heaps(prefix: str = None, n: int = 10) -> None:
 		run_heaps(TestType.log_parser, Language.go, go_heaps, prefix = prefix, threads = 1, search = search)
 		run1(TestType.log_parser, Language.python, prefix = prefix, search = search, single_thread = True)
 		# for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_boost") ]:
-		for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat") ]:
+		for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_std") ]:
 			run1(TestType.log_parser, Language.cpp_o3, prefix = prefix, threads = 1,
 					search = search, cpp_map = cpp_map, cpp_regex = cpp_regex)
 
@@ -415,7 +420,7 @@ def run_lp_heaps(prefix: str = None, n: int = 10) -> None:
 	run_heaps(TestType.log_parser, Language.go, go_heaps, prefix = prefix, threads = 96, search = "indexed")
 
 	# for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_boost") ]:
-	for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat") ]:
+	for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_std") ]:
 		run1(TestType.log_parser, Language.cpp_o3, prefix = prefix, threads = 16,
 				search = "indexed", cpp_map = cpp_map, cpp_regex = cpp_regex)
 
@@ -423,7 +428,7 @@ def run_lp_heaps(prefix: str = None, n: int = 10) -> None:
 	run_heaps(TestType.log_parser, Language.go, go_heaps, prefix = prefix, threads = 64, search = "regex")
 
 	# for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_boost") ]:
-	for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat") ]:
+	for cpp_map, cpp_regex in [ ("stl_unordered", "regex_std"), ("absl_flat", "regex_std") ]:
 		run1(TestType.log_parser, Language.cpp_o3, prefix = prefix, threads = 16,
 				search = "regex", cpp_map = cpp_map, cpp_regex = cpp_regex)
 
@@ -633,16 +638,16 @@ def run_js_notype(prefix: str = None, n: int = 10) -> None:
 
 def run_all(prefix: str = None, n: int = 10) -> None:
 	for i in range(n):
+		run_fs(prefix, n)
+		run_kv(prefix, n)
+		run_lp(prefix, n)
 		run_graph(TestType.graph_iterative, prefix, n)
 		run_graph(TestType.graph_recursive, prefix, n)
 		run_sudoku(prefix, n)
 		run_sort(prefix, n)
-		run_lp(prefix, n)
-		run_fs(prefix, n)
-		run_kv(prefix, n)
 
 def main() -> None:
-	run_all("tests/", 1)
+	run_all("runs/", 1)
 
 if __name__ == "__main__":
 	main()

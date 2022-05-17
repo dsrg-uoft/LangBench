@@ -9,11 +9,11 @@ from enum import Enum
 import shutil
 
 CLIENT_HOSTNAME = "baker4"
-HOME: str = os.environ.get("LANGBENCH", "$HOME/LangBench" )
+HOME: str = os.environ.get("LANGBENCH", os.environ["HOME"] + "/LangBench" )
 CLEAR_MEM: str = HOME + "/scripts/clear_mem/clear_mem.o"
 TIME: str = HOME + "/scripts/obs.o"
 OBS: str = HOME + "/scripts/obs.o -m"
-REDIS_HOME: str = os.environ.get("REDIS_HOME", "$HOME/redis" )
+REDIS_HOME: str = os.environ.get("REDIS_HOME", os.environ["HOME"] + "/redis" )
 
 RUNTIME_HOME: str = HOME + "/runtimes"
 
@@ -148,21 +148,21 @@ class Test:
 		name: str = self.name.replace("-", "_")
 		java_name: str = "".join([ x.capitalize() for x in name.split("_") ])
 
-		subprocess.run([ "pkill", "-9", "-f", name + "-o" ],
+		subprocess.run([ "pkill", "-9", "-U", "$UID", "-f", name + "-o" ],
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
-		subprocess.run([ "pkill", "-9", "-f", name + ".o" ],
+		subprocess.run([ "pkill", "-9", "-U", "$UID", "-f", name + ".o" ],
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
-		subprocess.run([ "pkill", "-9", "-f", "java .*" + java_name ],
+		subprocess.run([ "pkill", "-9", "-U", "$UID", "-f", "java .*" + java_name ],
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
-		subprocess.run([ "pkill", "-9", "-f", "node .*" + name ],
+		subprocess.run([ "pkill", "-9", "-U", "$UID", "-f", "node .*" + name ],
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
-		subprocess.run([ "pkill", "-9", "-f", "python .*" + name ],
+		subprocess.run([ "pkill", "-9", "-U", "$UID", "-f", "python .*" + name ],
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL)
 
 		if self.conf.client_hostname:
-			subprocess.run("ssh " + self.conf.client_hostname + " \'pkill -9 -f redis-benchmark\'",
+			subprocess.run("ssh " + self.conf.client_hostname + " \'pkill -9 -U $UID -f redis-benchmark\'",
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL, shell = True)
-			subprocess.run("ssh " + self.conf.client_hostname + " \'pkill -9 -f client.o\'",
+			subprocess.run("ssh " + self.conf.client_hostname + " \'pkill -9 -U $UID -f client.o\'",
 				stdout = subprocess.DEVNULL, stderr = subprocess.DEVNULL, shell = True)
 
 	def run(self) -> None:
