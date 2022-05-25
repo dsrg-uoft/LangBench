@@ -2,13 +2,17 @@
 
 set -xe
 
-export CC="${LANGBENCH}/prefix/bin/gcc"
-export CXX="${LANGBENCH}/prefix/bin/g++"
+PREFIX="${LANGBENCH}/prefix"
+CMAKE="${PREFIX}/bin/cmake"
+export CC="${PREFIX}/bin/gcc"
+export CXX="${PREFIX}/bin/g++"
+
+CPP="${LANGBENCH}/prefix"
+CBR="${LANGBENCH}/prefix/lib"
 
 OPTIMIZATION_LEVELS=(o2 o3)
 CONTAINER_TYPES=(stl_unordered stl_ordered absl_node absl_flat)
-# REGEX_TYPES=(std boost)
-REGEX_TYPES=(std)
+REGEX_TYPES=(std boost)
 
 if [[ ! -d build ]]; then
 	mkdir build
@@ -21,13 +25,10 @@ for o in ${OPTIMIZATION_LEVELS[*]}; do
 			touch log_parser.cpp
 			pushd build
 			rm -f CMakeCache.txt
-			cmake "-DLP_${o^^}=ON" "-DLP_${c^^}=ON" "-DLP_REGEX_${r^^}=ON" ..
+			$CMAKE -DCMAKE_PREFIX_PATH=$CPP -DCMAKE_BUILD_RPATH=$CBR "-DLP_${o^^}=ON" "-DLP_${c^^}=ON" "-DLP_REGEX_${r^^}=ON" ..
 			make -j 32
 			mv log_parser "../log_parser_${c}_regex_${r}-${o}.o"
 			popd
 		done
 	done
 done
-
-cp log_parser_stl_unordered_regex_std-o2.o log_parser-o2.o
-cp log_parser_stl_unordered_regex_std-o3.o log_parser-o3.o
